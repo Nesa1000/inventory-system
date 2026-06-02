@@ -14,5 +14,7 @@ func SetupRoutes(r *gin.Engine) {
 		api.GET("/products/:id", handlers.GetProduct)
 		api.PUT("/products/:id", handlers.UpdateProduct)
 		api.DELETE("/products/:id", handlers.DeleteProduct)
+		api.POST("/products/:id/adjust", handlers.AdjustProductStock)
+		api.GET("/products/low-stock", handlers.LowStockProduct)
 	}
 }
