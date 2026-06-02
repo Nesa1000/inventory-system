@@ -10,5 +10,9 @@ func SetupRoutes(r *gin.Engine) {
 	api := r.Group("/api/v1")
 	{
 		api.POST("/products", handlers.CreateProduct)
+		api.GET("/products", handlers.GetProducts)
+		api.GET("/products/:id", handlers.GetProduct)
+		api.PUT("/products/:id", handlers.UpdateProduct)
+		api.DELETE("/products/:id", handlers.DeleteProduct)
 	}
 }
