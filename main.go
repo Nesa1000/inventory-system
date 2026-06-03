@@ -10,11 +10,9 @@ import (
 )
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		panic("Error loading .env file")
-	}
+	// Load .env locally, ignore error in production
+	godotenv.Load()
+
 	config.ConnectDB()
 
 	r := gin.Default()
