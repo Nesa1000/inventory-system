@@ -7,12 +7,14 @@ Supports product management, stock adjustments, and low stock monitoring.
 
 **Base URL:** `https://inventory-system-production-fdfd.up.railway.app`
 
-No setup needed — the API is live and connected to a real database.
+No setup needed. The API is live and connected to a real database.
 You can test it directly using any HTTP client (Thunder Client, Postman)
 or open GET endpoints directly in your browser.
 
 **Quick test in browser:**
+
 GET https://inventory-system-production-fdfd.up.railway.app/api/v1/products
+
 GET https://inventory-system-production-fdfd.up.railway.app/api/v1/products/low-stock
 
 ## Tech Stack
