@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"strconv"
 	"net/http"
 
 	"github.com/Nesa1000/inventory-system/config"
@@ -43,16 +44,43 @@ func CreateProduct(c *gin.Context) {
 
 func GetProducts(c *gin.Context) {
 	var products []models.Product
+	var total int64
 
-	// Fetch all products
-	result := config.DB.Find(&products)
+	// Get page and limit from query params, set defaults
+	page := c.DefaultQuery("page", "1")
+	limit := c.DefaultQuery("limit", "10")
+
+	pageInt, err := strconv.Atoi(page)
+	if err != nil || pageInt < 1 {
+		pageInt = 1
+	}
+
+	limitInt, err := strconv.Atoi(limit)
+	if err != nil || limitInt < 1 {
+		limitInt = 10
+	}
+
+	offset := (pageInt - 1) * limitInt
+
+	// Count total records
+	config.DB.Model(&models.Product{}).Count(&total)
+
+	// Fetch paginated results
+	result := config.DB.Limit(limitInt).Offset(offset).Find(&products)
 	if result.Error != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to fetch products",
 		})
 		return
 	}
-	c.JSON(http.StatusOK, products)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data":       products,
+		"total":      total,
+		"page":       pageInt,
+		"limit":      limitInt,
+		"totalPages": (int(total) + limitInt - 1) / limitInt,
+	})
 }
 
 func GetProduct(c *gin.Context) {
