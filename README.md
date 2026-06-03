@@ -102,6 +102,7 @@ POST /api/v1/products/1/adjust
 ```
 
 ## Project Structure
+```bash
 inventory-system/
 │
 ├── main.go           # Entry point
@@ -122,6 +123,7 @@ inventory-system/
 ├── .gitignore
 ├── go.mod
 └── README.md
+```
 
 ## Future Improvements
 
