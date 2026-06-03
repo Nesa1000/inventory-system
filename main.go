@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"github.com/Nesa1000/inventory-system/config"
 	"github.com/Nesa1000/inventory-system/routes"
 
@@ -18,5 +19,10 @@ func main() {
 
 	r := gin.Default()
 	routes.SetupRoutes(r)
-	r.Run(":8080")
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	r.Run(":" + port)
 }
