@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["go build -o inventory-system ."]
+
+[start]
+cmd = "./inventory-system"
