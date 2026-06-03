@@ -103,16 +103,25 @@ POST /api/v1/products/1/adjust
 
 ## Project Structure
 inventory-system/
+│
 ├── main.go           # Entry point
+│
 ├── config/
 │   └── db.go         # Database connection
+│
 ├── models/
 │   └── product.go    # Product model
+│
 ├── handlers/
 │   └── product.go    # Request handlers
+│
 ├── routes/
 │   └── routes.go     # Route definitions
-└── .env              # Environment variables (not committed)
+│
+├── .env              # Environment variables (not committed)
+├── .gitignore
+├── go.mod
+└── README.md
 
 ## Future Improvements
 
