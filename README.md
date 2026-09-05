@@ -138,6 +138,40 @@ DATABASE_URL=your_postgresql_connection_string
 
 Server runs on `http://localhost:8080`
 
+## Running with Docker
+
+This project can be built and run in a Docker container.
+
+### 1. Set up environment variables
+
+Copy `.env.example` to `.env` and fill in your own values:
+
+\```
+cp .env.example .env
+\```
+
+Then edit `.env` with your actual Supabase (or other Postgres) connection string.
+
+### 2. Build the image
+
+\```
+docker build -t inventory-system .
+\```
+
+### 3. Run the container
+
+\```
+docker run -p 8080:8080 --env-file .env inventory-system
+\```
+
+The API will be available at `http://localhost:8080`.
+
+### Notes
+
+- Uses a multi-stage build — the final image contains only the compiled binary, not the Go source or toolchain, keeping the image small.
+- If connecting to Supabase, use the **Session Pooler** connection string (not the direct connection) for compatibility with Docker's default networking.
+- Make sure any special characters in your database password (e.g. `!`, `$`) are percent-encoded in the connection string.
+
 ## Project Structure
 ```bash
 inventory-system/
